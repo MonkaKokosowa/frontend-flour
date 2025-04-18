@@ -1,16 +1,44 @@
 ---
-
+import "../components/GlobalCSS.astro";
+import MainHtml from "../components/MainHtml.astro";
+import Navbar from "../components/Navbar.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainHtml title="Monica Flour">
+    <div style="padding: 2em;">
+        <div box-="square" style="padding: 2em; ">
+            <h1>Hi!!!</h1>
+            <span>
+                I'm Monica "Charlie" Flour, I am a normal person that has a lot
+                passion for computers. I really like anything that has to do
+                with computers (and that I know of). From programming apps and
+                embedded DIY projects to soldering and 3D modelling (and 3D
+                printing). I wouldn't say I'm perfect at any of them, but I'm
+                definitely better than a noob!
+            </span>
+            <br /><br />
+            <h2>What is this place?</h2>
+            <span>
+                I have decided to write this website, so that I have some place
+                to show off on the internet and to have a blog that no one will
+                read! It's definitely pretty basic, but hey, I'm good at code
+                not design (but I'm steadily getting better!)
+            </span>
+            <br /><br />
+            <h3>Why is this place?</h3>
+            <span>
+                Boredom and love of TUIs, God I could just use every app in
+                terminal if it had TUI...
+            </span>
+            <br /><br />
+            <h4>Hire me!</h4>
+            <span>
+                So, I may not be the best, but I surely can work on some things!
+                If you're looking for someone hardworking and one that can learn
+                more things if needed, why not hire me? You can contact me <a
+                    href="/contact">here</a
+                >
+            </span>
+        </div>
+    </div>
+</MainHtml>

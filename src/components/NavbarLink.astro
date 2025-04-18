@@ -1,0 +1,16 @@
+---
+const { path, title } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+
+<style>
+    #home-link {
+        text-decoration: none;
+        font-weight: 700;
+        color: var(--foreground1);
+    }
+</style>
+
+<a id="home-link" href={path}>
+    {pathname == path ? <h1>{title}</h1> : <span>{title}</span>}
+</a>

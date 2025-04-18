@@ -1,0 +1,38 @@
+---
+import "./GlobalCSS.astro";
+import NavbarLink from "./NavbarLink.astro";
+---
+
+<style>
+    .row {
+        display: flex;
+        justify-content: space-between; /* This pushes one item left, the other right */
+        align-items: center;
+        padding: 0.7em;
+    }
+
+    .title-square {
+        background-color: var(--background0);
+        color: var(--blue);
+        padding-top: 0px;
+        padding-right: 1ch;
+        padding-bottom: 0px;
+        padding-left: 1ch;
+    }
+</style>
+<nav style="margin: 1em;" box-="square contain:!top">
+    <header is-="row" align-="between">
+        <div variant-="background2" is-="badge">
+            <span class="title-square" is-="badge">Menu</span>
+        </div>
+    </header>
+    <div class="row">
+        <NavbarLink path="/" title="Monica Flour" />
+        <NavbarLink path="/blog" title="Blog" />
+        <NavbarLink path="/contact" title="Contact Me!" />
+        <NavbarLink path="/sociale" title="Social Media" />
+        <a href="https://github.com/MonkaKokosowa">
+            <img src="/github.svg" height="40" width="40" />
+        </a>
+    </div>
+</nav>
