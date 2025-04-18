@@ -1,6 +1,5 @@
 ---
-const { path, title } = Astro.props;
-const pathname = Astro.url.pathname;
+const { truetitle, title, path } = Astro.props;
 ---
 
 <style>
@@ -12,5 +11,5 @@ const pathname = Astro.url.pathname;
 </style>
 
 <a id="home-link" href={path}>
-    {pathname == path ? <h1>{title}</h1> : <span>{title}</span>}
+    {truetitle == title ? <h1>{title}</h1> : <span>{title}</span>}
 </a>

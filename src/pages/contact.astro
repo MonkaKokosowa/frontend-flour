@@ -2,4 +2,31 @@
 import MainHtml from "../components/MainHtml.astro";
 ---
 
-<MainHtml title="Monica Flour" />
+<MainHtml title="Contact Me!">
+    <style>
+        input {
+            padding: 0.5em;
+            margin: 0.5em;
+            border-radius: 4px;
+            margin-bottom: 1em;
+        }
+        textarea {
+            margin: 0.5em;
+        }
+    </style>
+
+    <div box-="round" class="column">
+        <input class="name" placeholder="Your name" />
+        <input class="email" placeholder="Your email" type="email" />
+        <textarea class="message" placeholder="Your message"></textarea>
+        <button class="send-button" box-="double">Send!</button>
+    </div>
+    <script>
+        function sendMail() {
+            alert("Message sent!");
+        }
+        document
+            .getElementsByClassName("send-button")[0]
+            .addEventListener("click", sendMail);
+    </script>
+</MainHtml>

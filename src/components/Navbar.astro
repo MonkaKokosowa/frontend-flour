@@ -1,16 +1,10 @@
 ---
 import "./GlobalCSS.astro";
 import NavbarLink from "./NavbarLink.astro";
+const { title } = Astro.props;
 ---
 
 <style>
-    .row {
-        display: flex;
-        justify-content: space-between; /* This pushes one item left, the other right */
-        align-items: center;
-        padding: 0.7em;
-    }
-
     .title-square {
         background-color: var(--background0);
         color: var(--blue);
@@ -27,10 +21,10 @@ import NavbarLink from "./NavbarLink.astro";
         </div>
     </header>
     <div class="row">
-        <NavbarLink path="/" title="Monica Flour" />
-        <NavbarLink path="/blog" title="Blog" />
-        <NavbarLink path="/contact" title="Contact Me!" />
-        <NavbarLink path="/sociale" title="Social Media" />
+        <NavbarLink truetitle={title} path="/" title="Monica Flour" />
+        <NavbarLink truetitle={title} path="/blog" title="Blog" />
+        <NavbarLink truetitle={title} path="/contact" title="Contact Me!" />
+        <NavbarLink truetitle={title} path="/sociale" title="Social Media" />
         <a href="https://github.com/MonkaKokosowa">
             <img src="/github.svg" height="40" width="40" />
         </a>
