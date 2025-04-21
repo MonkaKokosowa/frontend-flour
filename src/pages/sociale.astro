@@ -1,5 +1,37 @@
 ---
 import MainHtml from "../components/MainHtml.astro";
+
+// hashmap
+const socialMedia: Map<string, string> = new Map([
+    ["Bluesky", "https://bsky.app/profile/wheatflour.pl"],
+    ["Discord", "@iamwheatflour"],
+    ["Github", "https://github.com/MonkaKokosowa"]
+]);
+let yay: boolean = true;
+let finalHtml = "";
 ---
 
-<MainHtml title="Social Media" />
+<MainHtml title="Social Media">
+    <div box-="square" style="padding: 2em;">
+        {Array.from(socialMedia.entries()).map(([key, value], index) => {
+            // Alternate colors for each link
+            const color = yay ? "var(--blue)" : "var(--pink)";
+            yay = !yay;
+
+            // Special handling for Discord (since it's not a URL)
+            return key === "Discord" ? (
+                <div><span id="home-link" style={{ color }}>{key}: {value}</span><br /><br /></div>
+            ) : (
+                <div><a id="home-link" style={{ color }} href={value} target="_blank">{key}: {value}</a><br /><br /></div>
+            );
+        })}
+
+    </div>
+    <!-- <div box-="square" style="padding: 2em;">
+        <a id="home-link" style="color: var(--blue);" href="https://bsky.app/profile/wheatflour.pl" target="_blank">Click here for my Bluesky! (@wheatflour.pl)</a>
+        <br /><br />
+        <span id="home-link" style="color: var(--pink);">My discord is @iamwheatflour</span>
+        <br /><br />
+        <a id="home-link" style="color: var(--blue);" href="https://github.com/MonkaKokosowa" target="_blank">And here is my github!! (MonkaKokosowa)</a>
+      </div>     -->
+</MainHtml>

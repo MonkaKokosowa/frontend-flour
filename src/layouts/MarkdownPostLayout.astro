@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import MainHtml from '../components/MainHtml.astro';
+const {frontmatter} = Astro.props;
+
+---
+<style>
+    .styled-image {
+        max-width: 500px;
+        max-height: 500px;
+        width: auto;
+        height: auto;
+    }
+    .centered-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<MainHtml title={frontmatter.title}>
+    
+    <div style="padding: 2em;">
+        <div class="centered-div" box-="square" style="padding: 2em;">
+            <div>
+                <img class="styled-image" alt={frontmatter.image.alt} src={frontmatter.image.url}/>
+            <h1>{frontmatter.title}</h1>
+            <span>{frontmatter.description}</span>
+            <br /><br />
+            <h2>Written by: {frontmatter.author}</h2>
+            <br /><br />
+            
+            <slot/>
+            </div>
+        </div>
+    </div>
+
+</MainHtml>

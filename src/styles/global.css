@@ -1,0 +1,54 @@
+
+@layer base, utils, components;
+
+@import "@webtui/css/base.css";
+
+/* Utils */
+@import "@webtui/css/utils/box.css"; /*[!code ++]*/
+
+/* Components */
+@import "@webtui/css/components/button.css"; /*[!code ++]*/
+@import "@webtui/css/components/typography.css"; /*[!code ++]*/
+@import "@webtui/css/components/input.css";
+/* @import "@webtui/css/components/textarea.css"; */
+@import "@webtui/theme-catppuccin";
+
+@layer components {
+    textarea,
+    [is-~="textarea"] {
+        background-color: var(--background1);
+        color: var(--foreground0);
+        font-family: var(--font-family);
+        font-size: var(--font-size);
+        font-weight: var(--font-weight-normal);
+        line-height: var(--line-height);
+        outline: none;
+        border: none;
+        width: 25em;
+        height: 15em;
+        padding: 0.5em;
+        border-radius: 0.25em;
+        &::placeholder {
+            color: var(--foreground2);
+        }
+    }
+}
+.row {
+    display: flex;
+    justify-content: space-between; /* This pushes one item left, the other right */
+    align-items: center;
+    padding: 0.7em;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; /* This pushes one item left, the other right */
+    align-items: start;
+    padding: 2em;
+}
+
+#home-link {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--foreground1);
+}
