@@ -15,21 +15,51 @@ import MainHtml from "../components/MainHtml.astro";
         }
     </style>
 
-<div box-="square" style="padding: 2em;">
-    <span style="color: var(--red);" >WARNING!!!! I didn't implement yet the message functionality, just mail me at monica.flour@wheatflour.pl!</span>
-  </div>
+    <!-- <div box-="square" style="padding: 2em;">
+        It works now lol
+        <span style="color: var(--red);" >WARNING!!!! I didn't implement yet the message functionality, just mail me at monica.flour@wheatflour.pl!</span>
+    </div> -->
     <div box-="round" class="column">
-        <input class="name" placeholder="Your name" />
-        <input class="email" placeholder="Your email" type="email" />
-        <textarea class="message" placeholder="Your message"></textarea>
-        <button class="send-button" box-="double">Send!</button>
+        <input id="name" placeholder="Your name" />
+        <input id="email" placeholder="Your email" type="email" />
+        <textarea id="message" placeholder="Your message"></textarea>
+        <button id="send-button" box-="double">Send!</button>
     </div>
     <script>
-        function sendMail() {
-            alert("Message sent!");
+        async function sendMail() {
+            const data = getData();
+            try {
+                const response = await fetch(
+                    "https://backend.wheatflour.pl/mail",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    },
+                );
+                console.log(response);
+            } catch (error) {
+                console.error("Error: ", error);
+            }
         }
-        document
-            .getElementsByClassName("send-button")[0]
-            .addEventListener("click", sendMail);
+        function getData() {
+            const message = (
+                document.getElementById("message") as HTMLTextAreaElement
+            ).value;
+            const name = (document.getElementById("name") as HTMLInputElement)
+                .value;
+            const email = (document.getElementById("email") as HTMLInputElement)
+                .value;
+            return {
+                name: name,
+                email: email,
+                message: message,
+            };
+        }
+        const sendButton = document
+            .getElementById("send-button")
+            ?.addEventListener("click", sendMail);
     </script>
 </MainHtml>
