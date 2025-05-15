@@ -1,5 +1,25 @@
-# wheatflour.pl
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+# Floury Frontend
+## 🚧 This project is still a heavy WIP 🚧
+This is the main frontend of my website [that's here](https://wheatflour.pl). 
+It uses Astro and WebTUI CSS Library. 
+
+## Usage
+You can use this docker-compose to run it, or just build from source and run on bare metal
+```
+version: '3'
+
+services:
+  wheatflour:
+    image: ghcr.io/monkakokosowa/wheatflour.pl:main
+    ports:
+      - "4321:4321"
+```
+It doesn't currently use .env so heads-up remember to change backend URL!
+
+
+### Issues
+If you find any bugs, please don't abuse them but just make a bug report at [the issues tab](https://github.com/MonkaKokosowa/backend-flour/issues). 
+There's not much to abuse anyways, it's just me here :p
 
 ## 🧞 Commands
 
