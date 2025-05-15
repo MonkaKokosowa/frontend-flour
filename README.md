@@ -10,7 +10,7 @@ version: '3'
 
 services:
   wheatflour:
-    image: ghcr.io/monkakokosowa/wheatflour.pl:main
+    image: ghcr.io/monkakokosowa/frontend-flour:main
     ports:
       - "4321:4321"
 ```
