@@ -1,84 +1,5 @@
 ---
 import MainHtml from "../components/MainHtml.astro";
-
-import fs from 'fs';
-import path from 'path';
-import matter from "gray-matter"
-
-// Define a function that gets all Markdown files in a directory
-const getMarkdownFiles = (dir: string): string[] => {
-  return fs.readdirSync(dir).filter((file) => file.endsWith('.md'));
-};
-
-// Use the function to retrieve Markdown files from a specific directory
-const markdownFiles = getMarkdownFiles(path.join(process.cwd(), 'src/pages/posts'));
-// Read the content of each Markdown file and parse it
-const parsedFiles = markdownFiles.map((file) => {
-  const filePath = path.join(process.cwd(), 'src/pages/posts', file);
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
-  const { data } = matter(fileContent);
-  //turn data into Post
-  const postData = data as {
-    layout: string;
-  title: string;
-  pubDate: string;
-  description: string;
-  author: string;
-  image: {
-    url: string;
-    alt: string;
-  };
-  tags: string[];
-  
-  }
-
-
-
-  return { ...postData, file };
-});
-// Sort the files by date in descending order
-
-interface Post {
-  layout: string;
-  title: string;
-  pubDate: string;
-  description: string;
-  author: string;
-  image: {
-    url: string;
-    alt: string;
-  };
-  tags: string[];
-  file: string;
-}
-
-const posts: Post[] = [];
-parsedFiles.forEach((file) => {
-  const { layout, title, pubDate, description, author, image, tags } = file;
-  posts.push({
-    layout,
-    title,
-    pubDate,
-    description,
-    author,
-    image,
-    tags,
-    file: file.file
-  });
-});// Sort the posts by `pubDate` in descending order
-
-// Function to sort posts by `pubDate` (newest first)
-const sortPostsByDate = (posts: Post[]): Post[] => {
-  return posts.sort((a, b) => {
-    const dateA = new Date(a.pubDate.split('-').reverse().join('-'));
-    const dateB = new Date(b.pubDate.split('-').reverse().join('-'));
-    return dateB.getTime() - dateA.getTime(); // Newest posts first
-  });
-};
-
-// Get sorted posts
-const sortedPosts = sortPostsByDate(posts);
-
 ---
 
 <MainHtml title="Blog">
@@ -90,7 +11,8 @@ const sortedPosts = sortPostsByDate(posts);
             </span>
             <br /><br />
             <div box-="square" style="padding: 2em;">
-              <span style="color: var(--red);" >Sorry! Nothing here *yet*</span>
+                <span style="color: var(--red);">Sorry! Nothing here *yet*</span
+                >
             </div>
             <!-- {sortedPosts.map((post) => (
                 <div box-="square" style="padding: 2em;">

@@ -12,7 +12,7 @@ services:
   wheatflour:
     image: ghcr.io/monkakokosowa/frontend-flour:main
     ports:
-      - "4321:4321"
+      - "4321:80"
 ```
 It doesn't currently use .env so heads-up remember to change backend URL!
 
