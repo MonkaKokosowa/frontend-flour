@@ -21,10 +21,6 @@ import MainHtml from "../components/MainHtml.astro";
         }
     </style>
 
-    <!-- <div box-="square" style="padding: 2em;">
-        It works now lol
-        <span style="color: var(--red);" >WARNING!!!! I didn't implement yet the message functionality, just mail me at monica.flour@wheatflour.pl!</span>
-    </div> -->
     <div box-="round" class="column">
         <input maxlength="50" id="name" placeholder="Your name" />
         <input
@@ -54,9 +50,18 @@ import MainHtml from "../components/MainHtml.astro";
                 );
                 console.log(response);
                 if (response.ok) {
-                    document.getElementById("message")?.textContent = "";
-                    document.getElementById("email")?.textContent = "";
-                    document.getElementById("name")?.textContent = "";
+                    const messageElem = document.getElementById(
+                        "message",
+                    ) as HTMLTextAreaElement;
+                    messageElem.value = "";
+                    const emailElem = document.getElementById(
+                        "email",
+                    ) as HTMLInputElement;
+                    emailElem.value = "";
+                    const nameElem = document.getElementById(
+                        "name",
+                    ) as HTMLInputElement;
+                    nameElem.value = "";
                 }
             } catch (error) {
                 console.error("Error: ", error);
@@ -76,16 +81,18 @@ import MainHtml from "../components/MainHtml.astro";
                 message: message,
             };
         }
-        const sendButton = document
+        document
             .getElementById("send-button")
             ?.addEventListener("click", sendMail);
 
         const messageArea = document.getElementById("message");
         const messageCounter = document.getElementById("message-counter");
         messageArea?.addEventListener("input", () => {
-            const length = messageArea.value.length;
-            if (messageCounter) {
-                messageCounter.textContent = `${length}/500`;
+            if (messageArea instanceof HTMLTextAreaElement) {
+                const length = messageArea.value.length;
+                if (messageCounter) {
+                    messageCounter.textContent = `${length}/500`;
+                }
             }
         });
     </script>
