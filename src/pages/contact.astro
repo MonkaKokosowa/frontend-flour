@@ -48,7 +48,7 @@ import MainHtml from "../components/MainHtml.astro";
                         body: JSON.stringify(data),
                     },
                 );
-                console.log(response);
+                alert("Message sent successfully!");
                 if (response.ok) {
                     const messageElem = document.getElementById(
                         "message",
@@ -64,6 +64,7 @@ import MainHtml from "../components/MainHtml.astro";
                     nameElem.value = "";
                 }
             } catch (error) {
+                alert("Error sending message!");
                 console.error("Error: ", error);
             }
         }
