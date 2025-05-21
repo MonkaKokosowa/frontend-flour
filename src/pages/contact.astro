@@ -13,6 +13,12 @@ import MainHtml from "../components/MainHtml.astro";
         textarea {
             margin: 0.5em;
         }
+        p {
+            padding-left: 0.5em;
+            margin-left: 0.5em;
+            border-radius: 4px;
+            margin-bottom: 0.5em;
+        }
     </style>
 
     <!-- <div box-="square" style="padding: 2em;">
@@ -20,9 +26,16 @@ import MainHtml from "../components/MainHtml.astro";
         <span style="color: var(--red);" >WARNING!!!! I didn't implement yet the message functionality, just mail me at monica.flour@wheatflour.pl!</span>
     </div> -->
     <div box-="round" class="column">
-        <input id="name" placeholder="Your name" />
-        <input id="email" placeholder="Your email" type="email" />
-        <textarea id="message" placeholder="Your message"></textarea>
+        <input maxlength="50" id="name" placeholder="Your name" />
+        <input
+            maxlength="80"
+            id="email"
+            placeholder="Your email"
+            type="email"
+        />
+        <textarea maxlength="500" id="message" placeholder="Your message"
+        ></textarea>
+        <p id="message-counter">0/500</p>
         <button id="send-button" box-="double">Send!</button>
     </div>
     <script>
@@ -61,5 +74,14 @@ import MainHtml from "../components/MainHtml.astro";
         const sendButton = document
             .getElementById("send-button")
             ?.addEventListener("click", sendMail);
+
+        const messageArea = document.getElementById("message");
+        const messageCounter = document.getElementById("message-counter");
+        messageArea?.addEventListener("input", () => {
+            const length = messageArea.value.length;
+            if (messageCounter) {
+                messageCounter.textContent = `${length}/500`;
+            }
+        });
     </script>
 </MainHtml>
