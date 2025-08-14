@@ -22,79 +22,92 @@ import MainHtml from "../components/MainHtml.astro";
     </style>
 
     <div box-="round" class="column">
-        <input maxlength="50" id="name" placeholder="Your name" />
-        <input
-            maxlength="80"
-            id="email"
-            placeholder="Your email"
-            type="email"
-        />
-        <textarea maxlength="500" id="message" placeholder="Your message"
-        ></textarea>
-        <p id="message-counter">0/500</p>
-        <button id="send-button" box-="double">Send!</button>
-    </div>
-    <script>
-        async function sendMail() {
-            const data = getData();
-            try {
-                const response = await fetch(
-                    "https://backend.wheatflour.pl/mail",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
+        <div box-="square" style="padding: 2em;">
+            <span style="color: var(--red);"
+                >Because of sender auth it seems that my mail function is broken<br
+                />
+                now. I recommend contacting me on Discord or Bluesky for now!</span
+            >
+            <input disabled maxlength="50" id="name" placeholder="Your name" />
+            <input
+                disabled
+                maxlength="80"
+                id="email"
+                placeholder="Your email"
+                type="email"
+            />
+            <textarea
+                disabled
+                maxlength="500"
+                id="message"
+                placeholder="Your message"></textarea>
+            <p id="message-counter">0/500</p>
+            <button disabled id="send-button" box-="double">Send!</button>
+        </div>
+        <script>
+            async function sendMail() {
+                const data = getData();
+                try {
+                    const response = await fetch(
+                        "https://backend.wheatflour.pl/mail",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
                         },
-                        body: JSON.stringify(data),
-                    },
-                );
-                alert("Message sent successfully!");
-                if (response.ok) {
-                    const messageElem = document.getElementById(
-                        "message",
-                    ) as HTMLTextAreaElement;
-                    messageElem.value = "";
-                    const emailElem = document.getElementById(
-                        "email",
-                    ) as HTMLInputElement;
-                    emailElem.value = "";
-                    const nameElem = document.getElementById(
-                        "name",
-                    ) as HTMLInputElement;
-                    nameElem.value = "";
+                    );
+                    alert("Message sent successfully!");
+                    if (response.ok) {
+                        const messageElem = document.getElementById(
+                            "message",
+                        ) as HTMLTextAreaElement;
+                        messageElem.value = "";
+                        const emailElem = document.getElementById(
+                            "email",
+                        ) as HTMLInputElement;
+                        emailElem.value = "";
+                        const nameElem = document.getElementById(
+                            "name",
+                        ) as HTMLInputElement;
+                        nameElem.value = "";
+                    }
+                } catch (error) {
+                    alert("Error sending message!");
+                    console.error("Error: ", error);
                 }
-            } catch (error) {
-                alert("Error sending message!");
-                console.error("Error: ", error);
             }
-        }
-        function getData() {
-            const message = (
-                document.getElementById("message") as HTMLTextAreaElement
-            ).value;
-            const name = (document.getElementById("name") as HTMLInputElement)
-                .value;
-            const email = (document.getElementById("email") as HTMLInputElement)
-                .value;
-            return {
-                name: name,
-                email: email,
-                message: message,
-            };
-        }
-        document
-            .getElementById("send-button")
-            ?.addEventListener("click", sendMail);
+            function getData() {
+                const message = (
+                    document.getElementById("message") as HTMLTextAreaElement
+                ).value;
+                const name = (
+                    document.getElementById("name") as HTMLInputElement
+                ).value;
+                const email = (
+                    document.getElementById("email") as HTMLInputElement
+                ).value;
+                return {
+                    name: name,
+                    email: email,
+                    message: message,
+                };
+            }
+            document
+                .getElementById("send-button")
+                ?.addEventListener("click", sendMail);
 
-        const messageArea = document.getElementById("message");
-        const messageCounter = document.getElementById("message-counter");
-        messageArea?.addEventListener("input", () => {
-            if (messageArea instanceof HTMLTextAreaElement) {
-                const length = messageArea.value.length;
-                if (messageCounter) {
-                    messageCounter.textContent = `${length}/500`;
+            const messageArea = document.getElementById("message");
+            const messageCounter = document.getElementById("message-counter");
+            messageArea?.addEventListener("input", () => {
+                if (messageArea instanceof HTMLTextAreaElement) {
+                    const length = messageArea.value.length;
+                    if (messageCounter) {
+                        messageCounter.textContent = `${length}/500`;
+                    }
                 }
-            }
-        });
-    </script>
+            });
+        </script>
+    </div>
 </MainHtml>
