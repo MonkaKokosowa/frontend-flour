@@ -22,28 +22,19 @@ import MainHtml from "../components/MainHtml.astro";
     </style>
 
     <div box-="round" class="column">
-        <div box-="square" style="padding: 2em;">
-            <span style="color: var(--red);"
-                >Because of sender auth it seems that my mail function is broken<br
-                />
-                now. I recommend contacting me on Discord or Bluesky for now!</span
-            >
-        </div>
-        <input disabled maxlength="50" id="name" placeholder="Your name" />
+        <input maxlength="50" id="name" placeholder="Your name" />
         <input
-            disabled
             maxlength="80"
             id="email"
             placeholder="Your email"
             type="email"
         />
         <textarea
-            disabled
             maxlength="500"
             id="message"
             placeholder="Your message"></textarea>
         <p id="message-counter">0/500</p>
-        <button disabled id="send-button" box-="double">Send!</button>
+        <button id="send-button" box-="double">Send!</button>
     </div>
     <script>
         async function sendMail() {
