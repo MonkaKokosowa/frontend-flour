@@ -21,26 +21,71 @@ import MainHtml from "../components/MainHtml.astro";
         }
     </style>
 
-    <form
-        action="https://formspree.io/f/xrbyvjqw"
-        method="POST"
-        box-="round"
-        class="column"
-    >
+    <div box-="round" class="column">
         <input maxlength="50" id="name" placeholder="Your name" />
         <input
             maxlength="80"
             id="email"
-            name="email"
             placeholder="Your email"
             type="email"
         />
-        <textarea maxlength="500" name="message" placeholder="Your message"
+        <textarea maxlength="500" id="message" placeholder="Your message"
         ></textarea>
         <p id="message-counter">0/500</p>
-        <button type="submit">Send!</button>
-    </form>
+        <button id="send-button" box-="double">Send!</button>
+    </div>
     <script>
+        async function sendMail() {
+            const data = getData();
+            try {
+                const response = await fetch(
+                    "https://backend.wheatflour.pl/mail",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    },
+                );
+                alert("Message sent successfully!");
+                if (response.ok) {
+                    const messageElem = document.getElementById(
+                        "message",
+                    ) as HTMLTextAreaElement;
+                    messageElem.value = "";
+                    const emailElem = document.getElementById(
+                        "email",
+                    ) as HTMLInputElement;
+                    emailElem.value = "";
+                    const nameElem = document.getElementById(
+                        "name",
+                    ) as HTMLInputElement;
+                    nameElem.value = "";
+                }
+            } catch (error) {
+                alert("Error sending message!");
+                console.error("Error: ", error);
+            }
+        }
+        function getData() {
+            const message = (
+                document.getElementById("message") as HTMLTextAreaElement
+            ).value;
+            const name = (document.getElementById("name") as HTMLInputElement)
+                .value;
+            const email = (document.getElementById("email") as HTMLInputElement)
+                .value;
+            return {
+                name: name,
+                email: email,
+                message: message,
+            };
+        }
+        document
+            .getElementById("send-button")
+            ?.addEventListener("click", sendMail);
+
         const messageArea = document.getElementById("message");
         const messageCounter = document.getElementById("message-counter");
         messageArea?.addEventListener("input", () => {
